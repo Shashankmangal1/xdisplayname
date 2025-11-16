@@ -4,19 +4,13 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [fullName, setFullName] = useState("");
-  const [error, setError] = useState("");
 
-  // Form submit handler
   const handleSubmit = (e) => {
-    e.preventDefault(); // prevents refresh
+    e.preventDefault();
 
-    if (firstName.trim() === "" || lastName.trim() === "") {
-      setError("Please fill out both fields.");
-      setFullName("");
-      return;
-    }
+    
+    if (!firstName || !lastName) return;
 
-    setError("");
     setFullName(`${firstName} ${lastName}`);
   };
 
@@ -32,6 +26,7 @@ function App() {
           <input
             type="text"
             value={firstName}
+            required         
             onChange={(e) => setFirstName(e.target.value)}
             style={{ padding: "5px", width: "200px" }}
           />
@@ -42,6 +37,7 @@ function App() {
           <input
             type="text"
             value={lastName}
+            required         
             onChange={(e) => setLastName(e.target.value)}
             style={{ padding: "5px", width: "200px" }}
           />
@@ -60,14 +56,6 @@ function App() {
         </button>
       </form>
 
-      {/* Error message */}
-      {error && (
-        <p style={{ marginTop: "20px", color: "red", fontWeight: "bold" }}>
-          {error}
-        </p>
-      )}
-
-      {/* Full Name message */}
       {fullName && (
         <h2 style={{ marginTop: "20px" }}>Full Name: {fullName}</h2>
       )}
